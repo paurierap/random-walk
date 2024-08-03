@@ -16,11 +16,14 @@ Particle::~Particle()
 
 void Particle::random_walk()
 {
+    rng_init();
+    std::uniform_int_distribution<int> unif(0, 1);
+
     int previous_step = 0;
 
     for (int step = 0; step < step_number; step++)
     {
-        int new_step = std::fabs(std::rand() - 0.5) > 0 ? previous_step - 1: previous_step + 1;
+        int new_step = unif(rng) > 0.5 ? previous_step - 1: previous_step + 1;
         previous_step = position[step] = new_step;
     }
 }
